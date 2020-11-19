@@ -42,12 +42,12 @@ function getJobList($Mode) {
 		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 0;";
 	}
 	if ($Mode == 3) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 1 and;";
+		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 1 and secretary = 0;";
 	} 
 	if ($Mode == 4) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance;";
+		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 1 and secretary = 1;";
 	} else {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where status = 0;";
+		return;
 	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
