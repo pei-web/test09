@@ -4,7 +4,7 @@ session_start();
 // 	header("Location: loginForm.php");
 // } 
 
-require("todoModel.php");
+require("listModel.php");
 
 $id = (int)$_GET['id'];
 $rs = getJobDetail($id);
@@ -26,17 +26,17 @@ if (! $rs) {
 
 	  <input type='hidden' name='id' value='<?php echo $id ?>'>
 
-      task title: <input name="title" type="text" id="title" value="<?php echo htmlspecialchars($rs['title']);?>" /> <br>
+      Student family: <input name="family" type="text" id="family" value="<?php echo htmlspecialchars($rs['family']);?>" /> <br>
 
       task description: <input name="msg" type="text" id="msg" value="<?php echo htmlspecialchars($rs['content']);?>" /> <br>
 
-	  Urgent Level: <select  name="urgent" type="select" id="urgent" /> 
+	  Student class: <select  name="class" type="select" id="class" /> 
 				<?php
-					echo "<option value='{$rs['urgent']}'>{$rs['urgent']}</option>";
+					echo "<option value='{$rs['class']}'>{$rs['class']}</option>";
 				?>
-					<option value='一般'>一般</option>
-					<option value='重要'>重要</option>
-					<option value='緊急'>緊急</option>
+					<option value='低收入戶'>低收入戶</option>
+					<option value='中低收入戶'>中低收入戶</option>
+					<option value='家庭突發狀況'>家庭突發狀況</option>
 					</select>
 	  <br>
 

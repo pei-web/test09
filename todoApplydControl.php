@@ -1,5 +1,5 @@
 <?php
-require("todoModel.php");
+require("listModel.php");
 
 $title=mysqli_real_escape_string($conn,$_POST['title']);
 $msg=mysqli_real_escape_string($conn,$_POST['msg']);

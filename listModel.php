@@ -1,6 +1,10 @@
 <?php
 require_once("dbconnect.php");
-
+function addList($family,$class, $teacher) {
+	global $conn;
+	$sql = "insert into allowance (family,class, teacher) values ('$family','$class', 0);";
+	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
+}
 function teacherOpi($tOpi) {
 	global $conn;
 	$sql = "insert into allowance (teacher opinion) values ('$tOpi');";
