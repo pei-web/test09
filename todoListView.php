@@ -79,7 +79,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	// 	$fontColor="black";		
 	// }
 
-	echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
+	echo "<tr><td>" . $rs['id'] . "</td>";
 	echo "<td>{$rs['sID']}</td>";
 	echo "<td>{$rs['name']}</td>";
 	echo "<td>{$rs['family']}</td>";
