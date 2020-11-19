@@ -6,7 +6,7 @@ function checkUserIDPwd($userName, $passWord) {
 $userName = mysqli_real_escape_string($conn,$userName);
 $isValid = false;
 
-$sql = "SELECT sID FROM allowance WHERE name ='$userName'";
+$sql = "SELECT sID FROM user WHERE loginID ='$userName'";
 if ($result = mysqli_query($conn,$sql)) {
 	if ($row=mysqli_fetch_assoc($result)) {
 		if ($row['sID'] == $passWord) {
