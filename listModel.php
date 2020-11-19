@@ -39,13 +39,13 @@ function secretarySig($sID) {
 function getJobList($Mode) {
 	global $conn;
 	if ($Mode == 2) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 0;";
+		$sql = "select * from allowance where teacher = 0;";
 	}
 	if ($Mode == 3) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 1 and secretary = 0;";
+		$sql = "select * from allowance where teacher = 1 and secretary = 0;";
 	} 
 	if ($Mode == 4) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 1 and secretary = 1;";
+		$sql = "select * from allowance where teacher = 1 and secretary = 1;";
 	} else {
 		return;
 	}
