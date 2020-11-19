@@ -3,12 +3,18 @@ session_start();
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 } 
-if ($_SESSION['uID']=='boss'){
-	$bossMode = 1;
-} else {
-	$bossMode=0;
+if ($_SESSION['uID']=='student'){
+	$Mode = 1;
 }
-require("todoModel.php");
+if ($_SESSION['uID']=='teacher'){
+	$Mode = 2;
+}
+if ($_SESSION['uID']=='secretary'){
+	$Mode = 3;
+} else {
+	$Mode = 4;
+}
+require("listModel.php");
 if (isset($_GET['m'])){
 	$msg="<font color='red'>" . $_GET['m'] . "</font>";
 } else {
@@ -17,7 +23,7 @@ if (isset($_GET['m'])){
 
 
 
-$result=getJobList($bossMode);
+$result=getJobList($Mode);
 $jobStatus = array('未完成','已完成','已結案','已取消');
 
 

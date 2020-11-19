@@ -1,11 +1,6 @@
 <?php
 require_once("dbconnect.php");
 
-function addlist($family,$class,$teacher) {
-	global $conn;
-	$sql = "insert into allowance (family, class, teacher) values ('$family','$class',0);";
-	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
-}
 function teacherOpi($tOpi) {
 	global $conn;
 	$sql = "insert into allowance (teacher opinion) values ('$tOpi');";
@@ -18,16 +13,7 @@ function teacherSig($sID) {
 	mysqli_query($conn,$sql);
 	//return T/F
 }
-function getJobList($Mode) {
-	global $conn;
-	if ($bossMode) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from todo order by status, urgent desc;";
-	} else {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from todo where status = 0;";
-	}
-	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
-	return $result;
-}
+
 function result($result) {
 	global $conn;
 	$sql = "insert into allowance (result) values ('$result');";
@@ -45,11 +31,21 @@ function secretarySig($sID) {
 	$sql = "update allowance set secretary = 1 where id=$sID and secretay <> 0;";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
-function checkStudentList($id) {
+
+function getJobList($Mode) {
 	global $conn;
-	$sql = "select id, sID, name, class,teacher,teacher opinion, secretary,secretary opinion,result from allowance where id=$id;";
+	if ($Mode == 2) {
+		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 0;";
+	}
+	if ($Mode == 3) {
+		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where teacher = 1 and;";
+	} 
+	if ($Mode == 4) {
+		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance;";
+	} else {
+		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from allowance where status = 0;";
+	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
-	$rs=mysqli_fetch_assoc($result);
-	return $rs;
+	return $result;
 }
 ?>
