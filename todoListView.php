@@ -44,43 +44,55 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <table width="200" border="1">
   <tr>
     <td>id</td>
-    <td>title</td>
-    <td>message</td>
-	<td>Urgency</td>
-    <td>status</td>
-	<td>time used</td>
-	<td>-</td>
+    <td>sID</td>
+    <td>name</td>
+	<td>family</td>
+    <td>class</td>
+	<td>teacher</td>
+	<td>teacher opinion</td>
+	<td>secretary</td>
+	<td>result</td>
+	<td>secretary opinion</td>
+	<td>principal</td>
   </tr>
 <?php
 
 while (	$rs=mysqli_fetch_assoc($result)) {
-	switch($rs['urgent']) {
-		case '緊急':
-			$bgColor="#ff9999";
-			$timeLimit = 60;
-			break;
-		case '重要':
-			$bgColor="#99ff99";
-			$timeLimit = 120;
-			break;
-		default:
-			$bgColor="#ffffff";
-			$timeLimit = 180;
-			break;
-	}
+	// switch($rs['urgent']) {
+	// 	case '緊急':
+	// 		$bgColor="#ff9999";
+	// 		$timeLimit = 60;
+	// 		break;
+	// 	case '重要':
+	// 		$bgColor="#99ff99";
+	// 		$timeLimit = 120;
+	// 		break;
+	// 	default:
+	// 		$bgColor="#ffffff";
+	// 		$timeLimit = 180;
+	// 		break;
+	// }
 
-	if ($rs['diff']>$timeLimit) {
-		$fontColor="red";
-	} else {
-		$fontColor="black";		
-	}
+	// if ($rs['diff']>$timeLimit) {
+	// 	$fontColor="red";
+	// } else {
+	// 	$fontColor="black";		
+	// }
 
 	echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
-	echo "<td>{$rs['title']}</td>";
-	echo "<td>" , htmlspecialchars($rs['content']), "</td>";
-	echo "<td>" , htmlspecialchars($rs['urgent']), "</td>";
-	echo "<td>{$jobStatus[$rs['status']]}</td>" ;
-	echo "<td><font color='$fontColor'>{$rs['diff']}</font></td><td>";
+	echo "<td>{$rs['sID']}</td>";
+	echo "<td>{$rs['name']}</td>";
+	echo "<td>{$rs['family']}</td>";
+	echo "<td>{$rs['class']}</td>";
+	echo "<td>{$rs['teacher']}</td>";
+	echo "<td>{$rs['teacher opinion']}</td>";
+	echo "<td>{$rs['secretary']}</td>";
+	echo "<td>{$rs['result']}</td>";
+	echo "<td>{$rs['secretary opinion']}</td>";
+	echo "<td>{$rs['principal']}</td>";
+	// echo "<td>" , htmlspecialchars($rs['urgent']), "</td>";
+	// echo "<td>{$jobStatus[$rs['status']]}</td>" ;
+	// echo "<td><font color='$fontColor'>{$rs['diff']}</font></td><td>";
 	switch($rs['status']) {
 		case 0:
 			if ($bossMode) {
