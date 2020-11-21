@@ -23,7 +23,6 @@ if (isset($_GET['m'])){
 
 
 $result=getJobList($Mode);
-$jobStatus = array('未完成','已完成','已結案','已取消');
 
 
 ?>
@@ -31,15 +30,15 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>無標題文件</title>
+<title>補助申請清單</title>
 </head>
 
 <body>
 
-<p>my Todo List !! </p>
+<p>補助申請清單 !! </p>
 <hr />
+<div><font color="blue" size="5pt"><?php echo "Hello {$_SESSION['uID']}"; ?></font></div>
 <div><?php echo $msg; ?></div><hr>
-<a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Add Task</a> <br>
 <table width="200" border="1">
   <tr>
     <td>sID</td>
@@ -52,28 +51,10 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 	<td>result</td>
 	<td>secretary opinion</td>
 	<td>principal</td>
+  <td>Review/Return/Close</td>
   </tr>
 <?php
 while ($rs=mysqli_fetch_assoc($result)) {
-    // switch($rs['urgent']) {
-    // 	case '緊急':
-    // 		$bgColor="#ff9999";
-    // 		$timeLimit = 60;
-    // 		break;
-    // 	case '重要':
-    // 		$bgColor="#99ff99";
-    // 		$timeLimit = 120;
-    // 		break;
-    // 	default:
-    // 		$bgColor="#ffffff";
-    // 		$timeLimit = 180;
-    // 		break;
-    // }
-    // if ($rs['diff']>$timeLimit) {
-    // 	$fontColor="red";
-    // } else {
-    // 	$fontColor="black";
-    // }
     echo "<tr><td>{$rs['sID']}</td>";
     echo "<td>{$rs['name']}</td>";
     echo "<td>{$rs['family']}</td>";
@@ -84,29 +65,19 @@ while ($rs=mysqli_fetch_assoc($result)) {
     echo "<td>{$rs['result']}</td>";
     echo "<td>{$rs['secretaryOpinion']}</td>";
     echo "<td>{$rs['principal']}</td>";
-    // echo "<td>" , htmlspecialchars($rs['urgent']), "</td>";
-    // echo "<td>{$jobStatus[$rs['status']]}</td>" ;
-    // echo "<td><font color='$fontColor'>{$rs['diff']}</font></td><td>";
-    // switch($rs['status']) {
-    // 	case 0:
-    // 		if ($bossMode) {
-    // 			echo "<a href='todoEditForm.php?id={$rs['id']}'>Edit</a>  ";
-    // 			echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
-    // 		} else {
-    // 			echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>Finish</a>  ";
-    // 		}
-    // 		break;
-    // 	case 1:
-    // 		echo "<a href='todoSetControl.php?act=reject&id={$rs['id']}'>Reject</a>  ";
-    // 		echo "<a href='todoSetControl.php?act=close&id={$rs['id']}'>Close</a>  ";
-    // 		break;
-    // 	default:
-    // 		break;
-    // }
+    if ($Mode == 1) {
+      echo "<td><a href = 'tEdit.php?sID={$rs['sID']}'>Review</a></td>";
+    }
+    else if ($Mode == 2) {
+      echo "<td><a href = 'sEdit.php?sID={$rs['sID']}'>Review</a></td>";
+    } else {
+      echo "<td><a href = 'pEdit.php?sID={$rs['sID']}&id=0'>Return</a><br>";
+      echo "<a href = 'pEdit.php?sID={$rs['sID']}&id=1'>Case Close</a></td>";
+    }
     echo "</tr>";
 }
 ?>
 </table>
-<a href = "apply.php">apply</a>
+<a href="loginForm.php">logout</a>
 </body>
 </html>

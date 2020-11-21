@@ -6,7 +6,7 @@ $userName = $_POST['id'];
 $passWord = $_POST['pwd'];
 
 if (checkUserIDPwd($userName, $passWord)) {
-    if ($userName == "teacher" | "secretary" | "principal") {
+    if ($userName == "secretary" || $userName == "teacher" || $userName == "principal") {
         $_SESSION['uID'] = $userName;
         header("Location: todoListView.php");
 	}

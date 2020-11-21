@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2020 年 11 月 21 日 15:04
+-- 產生時間： 2020 年 11 月 21 日 19:31
 -- 伺服器版本： 10.4.6-MariaDB
 -- PHP 版本： 7.3.9
 
@@ -45,7 +45,11 @@ INSERT INTO `user` (`id`, `loginID`, `sID`, `password`) VALUES
 (3, 'secretary', 0, '123'),
 (4, 'principal', 0, '123'),
 (5, 'student2', 107213004, '123'),
-(6, 'student3', 107213005, '123');
+(6, 'student3', 107213005, '123'),
+(7, 'student4', 106213050, '123'),
+(8, 'student5', 106213039, '123'),
+(9, 'student6', 106213010, '123'),
+(10, 'Jason', 107213006, '123');
 
 --
 -- 已傾印資料表的索引
@@ -65,7 +69,7 @@ ALTER TABLE `user`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

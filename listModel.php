@@ -1,38 +1,28 @@
 <?php
 require_once("dbconnect.php");
-function addList($family,$class, $teacher) {
+// 老師評論
+function teacherOpi($sID, $tOpi) {
 	global $conn;
-	$sql = "insert into allowance (family,class, teacher) values ('$family','$class', 0);";
-	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
-}
-function teacherOpi($tOpi) {
-	global $conn;
-	$sql = "insert into allowance (teacher opinion) values ('$tOpi');";
+	$sql = "update allowance set teacherOpinion='$tOpi', teacher=1 where sID='$sID';";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
-function teacherSig($sID) {
+// 秘書評論、補助金額
+function secretaryOpi($sID, $sOp, $result) {
 	global $conn;
-	$sql = "update allowance set teacher = 1 where id=$sID and teacher <> 0;";
-	mysqli_query($conn,$sql);
-	//return T/F
-}
-
-function result($result) {
-	global $conn;
-	$sql = "insert into allowance (result) values ('$result');";
+	$sql = "update allowance set secretaryOpinion='$sOp', secretary=1, result='$result' where sID='$sID';";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
-function secretaryOpi($sOp) {
+function principalReturn($sID) {
 	global $conn;
-	$sql = "insert into allowance (secretary opinion) values ('$sOp');";
+	$sql = "update allowance set teacher=0, teacherOpinion='', secretary=0, result='', secretaryOpinion='', principal=0 where sID='$sID';";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
-function secretarySig($sID) {
+function principalClose($sID) {
 	global $conn;
-	$sql = "update allowance set secretary = 1 where id=$sID and secretay <> 0;";
+	$sql = "update allowance set principal=1 where sID='$sID';";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
@@ -46,7 +36,7 @@ function getJobList($Mode) {
 		$sql = 'select * from allowance where teacher = 1 and secretary = 0;';
 	} 
 	else if ($Mode == 3) {
-		$sql = 'select * from allowance where teacher = 1 and secretary = 1;';
+		$sql = 'select * from allowance where teacher = 1 and secretary = 1 and principal = 0;';
 	} else {
 		return;
 	}
@@ -54,6 +44,7 @@ function getJobList($Mode) {
 	return $result;
 }
 
+// 查看此user的申請狀態
 function getUserStatus($name) {
 	global $conn;
 	$sql = "select * from allowance where name='$name';";
@@ -78,21 +69,21 @@ function getJobDetail($name) {
 	}
 	return $rs;
 }
+
 // 從user取得資料
 function getUserDetail($name) {
 	global $conn;
-	if ($name == -1) { //-1 stands for adding a new record
-		$rs=[
-			"id" => -1,
-			"title" => "new title",
-			"content" => "job description",
-			"urgent" => "一般"
-		];
-	} else {
-		$sql = "select * from user where loginID='$name';";
-		$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
-		$rs=mysqli_fetch_assoc($result);
-	}
+	$sql = "select * from user where loginID='$name';";
+	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
+	$rs=mysqli_fetch_assoc($result);
+	return $rs;
+}
+
+function getDataDetail($sID) {
+	global $conn;
+	$sql = "select * from allowance where sID='$sID';";
+	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
+	$rs=mysqli_fetch_assoc($result);
 	return $rs;
 }
 

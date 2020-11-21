@@ -23,10 +23,11 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 </head>
 
 <body>
-<div><?php echo "hello $uID"; ?></div><hr>
+
 <p>申請補助選單 !! </p>
+<div><font color="blue" size="5pt"><?php echo "hello $uID"; ?></font></div>
 <div><?php echo $msg; ?></div><hr>
-<a href = "loginForm.php">login</a> 
+<a href = "loginForm.php">logout</a> 
 <a href = "apply.php">apply</a>
 <a href = "CheckStatus.php">CheckStatus</a>
 </body>
