@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2020 年 11 月 19 日 07:49
+-- 產生時間： 2020 年 11 月 21 日 15:04
 -- 伺服器版本： 10.4.6-MariaDB
 -- PHP 版本： 7.3.9
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `loginID` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sID` int(20) NOT NULL,
   `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -38,11 +39,13 @@ CREATE TABLE `user` (
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`id`, `loginID`, `password`) VALUES
-(1, 'student', '107213003'),
-(2, 'teacher', '1234'),
-(3, 'secretary', '5678'),
-(4, 'principal', '1212');
+INSERT INTO `user` (`id`, `loginID`, `sID`, `password`) VALUES
+(1, 'student1', 107213003, '123'),
+(2, 'teacher', 0, '123'),
+(3, 'secretary', 0, '123'),
+(4, 'principal', 0, '123'),
+(5, 'student2', 107213004, '123'),
+(6, 'student3', 107213005, '123');
 
 --
 -- 已傾印資料表的索引
@@ -62,7 +65,7 @@ ALTER TABLE `user`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
