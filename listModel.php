@@ -1,5 +1,13 @@
 <?php
 require_once("dbconnect.php");
+
+// 註冊
+function register($name,$studentID,$password) {
+	global $conn;
+	$sql = "insert into user (loginID, sID, password) values ('$name','$studentID', '$password');";
+	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
+}
+
 // 老師評論
 function teacherOpi($sID, $tOpi) {
 	global $conn;

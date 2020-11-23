@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2020 年 11 月 21 日 19:31
+-- 產生時間： 2020 年 11 月 23 日 19:57
 -- 伺服器版本： 10.4.6-MariaDB
 -- PHP 版本： 7.3.9
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
   `loginID` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `sID` int(20) NOT NULL,
   `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
@@ -39,17 +38,16 @@ CREATE TABLE `user` (
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`id`, `loginID`, `sID`, `password`) VALUES
-(1, 'student1', 107213003, '123'),
-(2, 'teacher', 0, '123'),
-(3, 'secretary', 0, '123'),
-(4, 'principal', 0, '123'),
-(5, 'student2', 107213004, '123'),
-(6, 'student3', 107213005, '123'),
-(7, 'student4', 106213050, '123'),
-(8, 'student5', 106213039, '123'),
-(9, 'student6', 106213010, '123'),
-(10, 'Jason', 107213006, '123');
+INSERT INTO `user` (`loginID`, `sID`, `password`) VALUES
+('teacher', 1, '123'),
+('secretary', 2, '123'),
+('principal', 3, '123'),
+('student6', 106213010, '123'),
+('student5', 106213039, '123'),
+('student4', 106213050, '123'),
+('student1', 107213003, '123'),
+('student2', 107213004, '123'),
+('student3', 107213005, '123');
 
 --
 -- 已傾印資料表的索引
@@ -59,17 +57,7 @@ INSERT INTO `user` (`id`, `loginID`, `sID`, `password`) VALUES
 -- 資料表索引 `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
---
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  ADD PRIMARY KEY (`sID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
